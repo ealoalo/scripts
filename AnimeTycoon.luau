@@ -37,6 +37,7 @@ local disableLasers = false
 local ignoredPlayers = {}
 
 -- ADDED BY CHIPLAG
+print("Debug Msg. - Version 1.1.0")
 local function fireAutoUpgrade()
 	local tycoon = game.Workspace.Tycoons:FindFirstChild(player.Team.Name)
 	local btns = tycoon.Buttons
@@ -139,6 +140,7 @@ autoCollect = v
 end
 })
 
+-- ADDED BY CHIPLAG
 Farm:CreateToggle({
 Name = "Auto Upgrade",
 CurrentValue = false,
@@ -147,6 +149,7 @@ Callback = function(v)
 autoUpgrade = v
 end
 })
+-- END ADDED BY CHIPLAG
 
 
 local function getTool()
