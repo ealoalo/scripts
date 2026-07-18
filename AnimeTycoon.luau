@@ -32,8 +32,39 @@ local killAura = false
 local ignoreFriends = true
 local auraRange = 25
 local autoCollect = false
+local autoUpgrade = false
 local disableLasers = false
 local ignoredPlayers = {}
+
+-- ADDED BY CHIPLAG
+local function fireAutoUpgrade()
+	local tycoon = game.Workspace.Tycoons:FindFirstChild(player.Team.Name)
+	local btns = tycoon.Buttons
+	local active = {}
+
+	local function getMoney()
+		return player.leaderstats.Cash.Value
+	end
+
+	for i, v in pairs(btns:GetChildren()) do
+		if v.Button.Transparency == 0 and v:FindFirstChild("Gamepass") == nil then
+			table.insert(active, v)
+		end
+	end
+	local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+	if not hrp then return end
+	if next(active) then return end
+
+	local oc = hrp.CFrame
+	for _, v in pairs(active) do
+		if getMoney() >= v.Price.Value then
+			hrp.CFrame = v.Button.CFrame
+			task.wait(0.01)
+		end
+	end
+	hrp.CFrame = oc
+end
+-- END OF ADDED BY CHIPLAG
 
 local function notify(title, content)
 Rayfield:Notify({
@@ -107,6 +138,16 @@ Callback = function(v)
 autoCollect = v
 end
 })
+
+Farm:CreateToggle({
+Name = "Auto Upgrade",
+CurrentValue = false,
+Flag = "AutoUpgrade",
+Callback = function(v)
+autoUpgrade = v
+end
+})
+
 
 local function getTool()
 local char = player.Character
@@ -337,6 +378,12 @@ task.wait(.05)
             end
         end
     end
+
+	-- ADDED BY CHIPLAG
+	if autoUpgrade then
+		fireAutoUpgrade()
+	end
+	-- END ADDED BY CHIPLAG
 
     if not root then
         continue
