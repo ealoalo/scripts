@@ -37,7 +37,7 @@ local disableLasers = false
 local ignoredPlayers = {}
 
 -- ADDED BY CHIPLAG
-print("Debug Msg. - Version 1.1.0")
+--print("Debug Msg. - Version 1.1.1")
 local function fireAutoUpgrade()
 	local tycoon = game.Workspace.Tycoons:FindFirstChild(player.Team.Name)
 	local btns = tycoon.Buttons
@@ -54,10 +54,12 @@ local function fireAutoUpgrade()
 	end
 	local hrp = player.Character:FindFirstChild("HumanoidRootPart")
 	if not hrp then return end
-	if next(active) then return end
+	-- Check theres a button to be clicked
+	if not next(active) then return end
 
 	local oc = hrp.CFrame
 	for _, v in pairs(active) do
+		-- Check Money
 		if getMoney() >= v.Price.Value then
 			hrp.CFrame = v.Button.CFrame
 			task.wait(0.01)
@@ -384,7 +386,7 @@ task.wait(.05)
 
 	-- ADDED BY CHIPLAG
 	if autoUpgrade then
-		fireAutoUpgrade()
+			fireAutoUpgrade()
 	end
 	-- END ADDED BY CHIPLAG
 
