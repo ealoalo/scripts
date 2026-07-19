@@ -5,11 +5,7 @@
 ```luau
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ealoalo/scripts/main/AnimeTycoon.luau",true))()
 ```
-## Anime Tycoon
 
-```luau
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ealoalo/scripts/main/AnimeTycoon.luau",true))()
-```
 ## Guess the Slapper
 
 ```luau
